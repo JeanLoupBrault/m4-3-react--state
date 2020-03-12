@@ -16,30 +16,29 @@ class Counter extends React.Component {
     super(props);
 
     this.state = {
-      count: 0,
-    }
+      count: 0
+    };
   }
 
   render() {
     return (
       <>
         Count: {this.state.count}
-
         <button
           onClick={() => {
             this.setState({
               count: this.state.count + 1
-            })
+            });
           }}
         >
           Increment
         </button>
       </>
-    )
+    );
   }
 }
 
-render(<Counter />)
+render(<Counter />);
 ```
 
 ---
@@ -59,8 +58,25 @@ It's important to be aware of classes, since many online resources will use them
 # Cheatsheet
 
 ```jsx
+//New way
 const [count, setCount] = React.useState(0);
+//old way
+// Initialization
+React.useState(0) === this.state = { count: 0 };
 
+// Accessing the state value
+count === this.state.count;
+
+// Updating the state value
+setCount(count + 1) === this.setState({ count: this.state.count + 1 });
+```
+
+jsx
+import react, { useState } from React;
+
+//New way
+const [count, setCount] = useState(0);
+//old way
 // Initialization
 React.useState(0) === this.state = { count: 0 }
 
@@ -69,7 +85,6 @@ count === this.state.count
 
 // Updating the state value
 setCount(count + 1) === this.setState({ count: this.state.count + 1 })
-```
 
 ---
 
@@ -85,24 +100,19 @@ class Temperature extends React.Component {
     super(props);
 
     this.state = {
-      t: 32,
-    }
+      t: 32
+    };
   }
 
   render() {
-    return (
-      <p>
-        Temperature: {this.state.t + 5}
-      </p>
-    )
+    return <p>Temperature: {this.state.t + 5}</p>;
   }
 }
 
-render(<Temperature />)
+render(<Temperature />);
 ```
 
 ---
-
 
 ```jsx live=true clickToReveal=true
 class Temperature extends React.Component {
@@ -110,24 +120,19 @@ class Temperature extends React.Component {
     super(props);
 
     this.state = {
-      t: this.props.initialT,
-    }
+      t: this.props.initialT
+    };
   }
 
   render() {
     // Not actually the right formula
-    const temperatureInFahrenheit =
-      this.state.t * 0.5 + 32;
+    const temperatureInFahrenheit = this.state.t * 0.5 + 32;
 
-    return (
-      <p>
-        Temperature: {temperatureInFahrenheit}
-      </p>
-    )
+    return <p>Temperature: {temperatureInFahrenheit}</p>;
   }
 }
 
-render(<Temperature initialT={-10} />)
+render(<Temperature initialT={-10} />);
 ```
 
 ---
@@ -140,31 +145,32 @@ class Temperature extends React.Component {
     super(props);
 
     this.state = {
-      t: this.props.initialT,
-    }
+      t: this.props.initialT
+    };
   }
 
   render() {
     // Not actually the right formula
-    const temperatureInFahrenheit =
-      this.state.t * 0.5 + 32;
+    const temperatureInFahrenheit = this.state.t * 0.5 + 32;
 
     return (
       <div>
         <p>Temperature: {temperatureInFahrenheit}</p>
         <button
-          onClick={() => this.setState({
-            t: this.state.t + 10
-          })}
+          onClick={() =>
+            this.setState({
+              t: this.state.t + 10
+            })
+          }
         >
           Make it hotter
         </button>
       </div>
-    )
+    );
   }
 }
 
-render(<Temperature initialT={0} />)
+render(<Temperature initialT={0} />);
 ```
 
 ---

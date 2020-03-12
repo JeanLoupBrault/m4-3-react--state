@@ -1,5 +1,5 @@
 export const categories = {
-    'sci-fi-fantasy': {
+    sciFiFantasy: {
         id: 'sci-fi-fantasy',
         name: 'Science Fiction & Fantasy',
     },
@@ -11,7 +11,7 @@ export const categories = {
         id: 'literature',
         name: 'Literature & Fiction',
     },
-    'non-fiction': {
+    nonFiction: {
         id: 'non-fiction',
         name: 'Non Fiction',
     },

@@ -12,19 +12,17 @@ State is _dynamic data_. Things that change.
 
 ```jsx live=true
 const Counter = () => {
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = React.useState(0); // 0 is initial value
 
   return (
     <>
       <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>
-        Increment
-      </button>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
     </>
-  )
-}
+  );
+};
 
-render(<Counter />)
+render(<Counter />);
 ```
 
 ---
@@ -55,7 +53,6 @@ Hooks are way of "hooking into" React's abilities, like managing state.
 
 ---
 
-
 # 🙅‍♀️ Mutating state
 
 This snippet won't throw an error, but it also won't work:
@@ -84,7 +81,7 @@ This is why the values on the screen change.
 
 ```jsx live=true
 const Name = () => {
-  const [name, setName] = React.useState('');
+  const [name, setName] = React.useState("");
 
   return (
     <div style={{ fontSize: 32 }}>
@@ -98,10 +95,10 @@ const Name = () => {
       />
       <p>Your name is {name}</p>
     </div>
-  )
-}
+  );
+};
 
-render(<Name />)
+render(<Name />);
 ```
 
 <!--
@@ -130,11 +127,7 @@ function SomeComponent() {
 
   console.log(count);
 
-  return (
-    <button onClick={() => setCount(count + 1)}>
-      One, Two, Three!
-    </button>
-  )
+  return <button onClick={() => setCount(count + 1)}>One, Two, Three!</button>;
 }
 ```
 
@@ -148,14 +141,7 @@ function SomeComponent() {
 
   console.log(thing);
 
-  return (
-    <input
-      value={thing}
-      onChange={(ev) =>
-        setThing(ev.target.value)
-      }
-    />
-  )
+  return <input value={thing} onChange={ev => setThing(ev.target.value)} />;
 }
 ```
 
@@ -172,14 +158,9 @@ function SomeComponent() {
   return (
     <input
       value={thing}
-      onChange={(ev) =>
-        setThing(
-          thing +
-          Number(ev.target.value)
-        )
-      }
+      onChange={ev => setThing(thing + Number(ev.target.value))}
     />
-  )
+  );
 }
 ```
 
@@ -198,15 +179,14 @@ function SomeComponent() {
       <input
         type="checkbox"
         checked={agreed}
-        onChange={(ev) =>
-          setAgreed(!agreed)
-        }
+        onChange={ev => setAgreed(!agreed)}
       />
       Yes I want to receive spam
     </label>
-  )
+  );
 }
 ```
+
 ---
 
 # State and Props
@@ -224,27 +204,54 @@ const App = () => {
       <SearchInput />
       <SearchResults />
     </>
-  )
-}
+  );
+};
 
 const SearchInput = () => {
-  const [searchTerm, setSearchTerm] = React.useState('');
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   return (
     <input
       type="text"
       value={searchTerm}
-      onChange={(ev) => {
+      onChange={ev => {
         setSearchTerm(ev.target.value);
       }}
     />
   );
-}
+};
 
 const SearchResults = () => {
   // ??
-}
+};
 ```
+
+const App = () => {
+const [searchTerm, setSearchTerm] = React.useState('');
+return (
+<>
+<SearchInput />
+<SearchResults />
+</>
+)
+}
+
+const SearchInput = ({ searchTerm, setSearchTerm }) => {
+
+return (
+<input
+type="text"
+value={searchTerm}
+onChange={(ev) => {
+setSearchTerm(ev.target.value);
+}}
+/>
+);
+}
+
+const SearchResults = ({ searchTerm }) => {
+// ??
+}
 
 ---
 
@@ -264,31 +271,52 @@ const Counter = () => {
 
   return (
     <>
-      <button onClick={() => setCount(count + 1)}>
-        Increment
-      </button>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
     </>
-  )
+  );
 };
 
 const App = () => {
   return (
     <>
       The current count is: ???
-
       <Counter />
     </>
-  )
-}
+  );
+};
 
-render(<App />)
+render(<App />);
 ```
 
----
+jsx live=true
+const Counter = ({ count, setCount }) => {
+
+return (
+<>
+<button onClick={() => setCount(count + 1)}>
+Increment
+</button>
+</>
+)
+};
+
+const App = () => {
+const [count, setCount] = React.useState(0);
+return (
+<>
+<p>The current count is: {count}</p> //???
+
+      <Counter count={count}, setCount={setCount} />
+    </>
+
+)
+}
+
+## render(<App />)
 
 ```jsx live=true
 const FavouriteFood = () => {
-  const [food, setFood] = React.useState('');
+  const [food, setFood] = React.useState("");
 
   return (
     <>
@@ -297,8 +325,8 @@ const FavouriteFood = () => {
           type="radio"
           name="food"
           value="pizza"
-          checked={food === 'pizza'}
-          onChange={() => setFood('pizza')}
+          checked={food === "pizza"}
+          onChange={() => setFood("pizza")}
         />
         Pizza
       </label>
@@ -307,29 +335,70 @@ const FavouriteFood = () => {
           type="radio"
           name="food"
           value="broccoli"
-          checked={food === 'broccoli'}
-          onChange={() => setFood('broccoli')}
+          checked={food === "broccoli"}
+          onChange={() => setFood("broccoli")}
         />
         Broccoli
       </label>
     </>
-  )
+  );
 };
 
 const App = () => {
   return (
     <>
       My favourite food is: ???
-      <br /><br />
+      <br />
+      <br />
       <FavouriteFood />
     </>
-  )
-}
+  );
+};
 
-render(<App />)
+render(<App />);
 ```
 
----
+jsx live=true
+const FavouriteFood = ({ setFood }) => {
+
+return (
+<>
+<label>
+<input
+type="radio"
+name="food"
+value="pizza"
+  
+ onChange={() => setFood('pizza')}
+/>
+Pizza
+</label>
+<label>
+<input
+type="radio"
+name="food"
+value="broccoli"
+  
+ onChange={() => setFood('broccoli')}
+/>
+Broccoli
+</label>
+</>
+)
+};
+
+const App = () => {
+const [food, setFood] = React.useState('');
+return (
+<>
+<p>My favourite food is: {food}</p> //???
+  
+ <FavouriteFood food={food} setFood={setFood} />
+</>
+)
+}
+
+## render(<App />)
 
 ### Conditional rendering
 
@@ -343,17 +412,32 @@ render(<App />)
     <>
       <h3>What do you call someone with no body and no nose?</h3>
 
+      {showAnswer && <p>Nobody knows!</p>}
+
+      <button onClick={() => setShowAnswer(true)}>Show punchline</button>
+    </>
+  );
+};
+```
+
+jsx live=true inline=true
+() => {
+const [showAnswer, setShowAnswer] = React.useState(false);
+
+return (
+<>
+<h3>What do you call someone with no body and no nose?</h3>
+
       {showAnswer && (
         <p>Nobody knows!</p>
-      )} 
-      
-      <button onClick={() => setShowAnswer(true)}>
+      )}
+
+      <button onClick={() => setShowAnswer(!showAnswer)}>
         Show punchline
       </button>
     </>
-  )
-}
 
-```
+)
+}
 
 ---

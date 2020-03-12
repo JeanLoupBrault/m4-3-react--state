@@ -13,7 +13,7 @@ const Button = styled.button`
   border-radius: 4px;
   font-size: 18px;
   font-weight: bold;
-  background: #EEE;
+  background: #eee;
 `;
 
 const BlueButton = styled.button`
@@ -22,15 +22,19 @@ const BlueButton = styled.button`
   border-radius: 4px;
   font-size: 18px;
   font-weight: bold;
-  background: #2B00D7;
-  color: #FFF;
-`
+  background: #2b00d7;
+  color: #fff;
+`;
 
-render(<>
-  <Button>Button 1</Button>
-  <BlueButton>Button 2</BlueButton>
-</>)
+render(
+  <>
+    <Button>Button 1</Button>
+    <BlueButton>Button 2</BlueButton>
+  </>
+);
 ```
+
+const BlueButton = styled(Button)`background: #2B00D7; color: #FFF;`
 
 ---
 
@@ -45,7 +49,15 @@ const ListItem = styled.li`
   &:last-of-type {
     border-bottom: none;
   }
-`
+`;
 ```
+
+//css
+.sc-we4e {
+border-bottom: 1px solid;
+}
+.sc-we4e:last-of-type {
+border-bottom: none;
+}
 
 ---
